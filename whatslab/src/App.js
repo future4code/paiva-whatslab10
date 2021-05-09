@@ -4,14 +4,14 @@ import React from "react";
 const ContainerBody = styled.div `
   box-sizing: border-box;
   display: flex;
-  justify-content: center
+  justify-content: space-between
 `
 
 const ContainerTudo = styled.div `
   box-sizing: border-box;
   display: flex;
   flex-direction: column-reverse;
-  width: 40vw;
+  width: 60vw;
   height: 100vh;
   border: 1px solid;
   background: pink;
@@ -20,17 +20,35 @@ const ContainerTudo = styled.div `
 const InputNome = styled.input`
   border: none;
   border-radius: 10px;
-  height: 20px;
+  height: 4vh;
   width: 100px; 
 
 `
 const InputSms = styled.input `
   border: none;
   border-radius: 10px;
-  height: 20px;
-  width: 300px; 
+  height: 4vh;
+  width: 45vw; 
 
 `
+const EstilizacaoBalaoChatUm = styled.div `
+  background-color:green;
+  margin: 5px;
+  width: 60%;
+  display: flex;
+  justify-content: flex-start;
+
+`
+
+const EstilizacaoBalaoChatDois = styled.div `
+  background-color: red;
+  margin: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  `
+
 
 const Botao = styled.button `
   border: none;
@@ -57,7 +75,7 @@ class App extends React.Component {
 
   state = {
   
-  mensagemNoChat: [],
+  mensagemNoChat: [{nome:'eu', mensagem: 'nhe'}, {nome:'Túlio', mensagem: 'nhenheeee'} ],
   nomeInput: '',
   mensagemInput: '',
 }
@@ -85,26 +103,36 @@ enviar = (() => {
 render(){
 
   const chat = this.state.mensagemNoChat.map((valor)=>{
+    if (valor.nome === 'eu'){
+      return (
+      <EstilizacaoBalaoChatUm>
+        <div> {valor.mensagem} </div>
+      </EstilizacaoBalaoChatUm>  
+      )
+    }else {
     return (
-      <div>
+      <EstilizacaoBalaoChatDois>
         <div> {valor.nome} </div>
         <div> {valor.mensagem} </div>
-      </div>  
+      </EstilizacaoBalaoChatDois>  
     )
+    }
   })
 
 
   return (
     <ContainerBody>
       <ContainerTudo>
+        
         <Footer>
-
           <InputNome placeholder={'Nome'} value={this.state.nomeInput} onChange={this.handleName}/>
           <InputSms placeholder={'Mensagem'} value={this.state.mensagemInput} onChange={this.handleMensagem}/>
           <Botao onClick={this.enviar}>Enviar</Botao>
         </Footer>
-        <div>{chat}</div>
-
+        <div>
+        {chat}
+        </div>
+        
       </ContainerTudo>
     </ContainerBody>
   );
