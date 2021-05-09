@@ -37,6 +37,8 @@ const EstilizacaoBalaoChatUm = styled.div `
   width: 60%;
   display: flex;
   justify-content: flex-start;
+  box-sizing: border-box;
+
 
 `
 
@@ -46,6 +48,8 @@ const EstilizacaoBalaoChatDois = styled.div `
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  box-sizing: border-box;
+
 
   `
 
