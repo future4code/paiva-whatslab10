@@ -3,6 +3,7 @@ import './App.css';
 import Chat from './components/Chat';
 import { useState} from 'react';
 
+
 function App() {
 
   function enviar (){
@@ -36,6 +37,5 @@ function App() {
     </div>
     )
     }
-
 
 export default App;
