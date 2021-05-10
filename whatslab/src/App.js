@@ -14,25 +14,24 @@ function App() {
       tipoMsg = 'enviado'
     }
     
-
     const msgObjeto = {nome: nome.value, msg: mensagem.value, tipoMsg: tipoMsg}
     nome.value = '';
     mensagem.value = '';
     setMensagens([...mensagens, msgObjeto]);
   }
 
-  const [mensagens, setMensagens] = useState([]); //
+  const [mensagens, setMensagens] = useState([]); 
 
   return(
     <div>
     {mensagens.map((mensagem) => (
       <Chat msg={mensagem.msg} tipoMsg={mensagem.tipoMsg} nome={mensagem.nome}></Chat>
     ))}
-
+    <div className='chat'></div>
     <div className='containerInput'>
-      <input name='nome' placeholder='Nome'/>
-      <input name='mensagem' placeholder='Digite uma mensagem...'/>
-      <button onClick={enviar}>Enviar</button>
+      <input className='input' name='nome' placeholder='Nome'/>
+      <input className='inputMsg' name='mensagem' placeholder='Digite uma mensagem...'/>
+      <button className='botao' onClick={enviar}>Enviar</button>
     </div>
     </div>
     )
