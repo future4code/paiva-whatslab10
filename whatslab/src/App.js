@@ -1,149 +1,42 @@
-import styled from "styled-components";
-import React from "react";
+import React from 'react';
+import './App.css';
+import Chat from './components/Chat';
+import { useState} from 'react';
 
-const ContainerBody = styled.div `
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between
-`
+function App() {
 
-const ContainerTudo = styled.div `
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column-reverse;
-  width: 60vw;
-  height: 100vh;
-  border: 1px solid;
-  background: pink;
+  function enviar (){
+    let nome = document.getElementsByName('nome')[0];
+    let mensagem = document.getElementsByName('mensagem')[0];
+    let tipoMsg = 'recebido';
 
-`
-const InputNome = styled.input`
-  border: none;
-  border-radius: 10px;
-  height: 4vh;
-  width: 100px; 
+    if (nome.value === 'eu'){
+      tipoMsg = 'enviado'
+    }
+    
 
-`
-const InputSms = styled.input `
-  border: none;
-  border-radius: 10px;
-  height: 4vh;
-  width: 45vw; 
+    const msgObjeto = {nome: nome.value, msg: mensagem.value, tipoMsg: tipoMsg}
+    nome.value = '';
+    mensagem.value = '';
+    setMensagens([...mensagens, msgObjeto]);
+  }
 
-`
-const EstilizacaoBalaoChatUm = styled.div `
-  background-color:green;
-  margin: 5px;
-  width: 60%;
-  display: flex;
-  justify-content: flex-start;
-  box-sizing: border-box;
+  const [mensagens, setMensagens] = useState([]); //
 
+  return(
+    <div>
+    {mensagens.map((mensagem) => (
+      <Chat msg={mensagem.msg} tipoMsg={mensagem.tipoMsg} nome={mensagem.nome}></Chat>
+    ))}
 
-`
-
-const EstilizacaoBalaoChatDois = styled.div `
-  background-color: red;
-  margin: 5px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  box-sizing: border-box;
-
-
-  `
-
-
-const Botao = styled.button `
-  border: none;
-  border-radius: 1px;
-  height: 25px;
-
-`
-
-const Footer = styled.div `
-  box-sizing: border-box;
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: lightgrey;
-`
-
-
-
-class App extends React.Component {
-
-  state = {
-  
-  mensagemNoChat: [{nome:'eu', mensagem: 'nhe'}, {nome:'Túlio', mensagem: 'nhenheeee'} ],
-  nomeInput: '',
-  mensagemInput: '',
-}
-
-handleName = ((event) => {
-  this.setState({nomeInput: event.target.value})
-
-})
-
-handleMensagem = ((event) => {
-  this.setState({mensagemInput: event.target.value})
-
-})
-
-enviar = (() => {
-  const novaMsg = {nome: this.state.nomeInput, mensagem: this.state.mensagemInput}
-  this.setState ({
-    mensagemNoChat: [...this.state.mensagemNoChat, novaMsg],
-    nomeInput: '',
-    mensagemInput: '',
-  })
-})
-
-
-render(){
-
-  const chat = this.state.mensagemNoChat.map((valor)=>{
-    if (valor.nome === 'eu'){
-      return (
-      <EstilizacaoBalaoChatUm>
-        <div> {valor.mensagem} </div>
-      </EstilizacaoBalaoChatUm>  
-      )
-    }else {
-    return (
-      <EstilizacaoBalaoChatDois>
-        <div> {valor.nome} </div>
-        <div> {valor.mensagem} </div>
-      </EstilizacaoBalaoChatDois>  
+    <div className='containerInput'>
+      <input name='nome' placeholder='Nome'/>
+      <input name='mensagem' placeholder='Digite uma mensagem...'/>
+      <button onClick={enviar}>Enviar</button>
+    </div>
+    </div>
     )
     }
-  })
-
-
-  return (
-    <ContainerBody>
-      <ContainerTudo>
-        
-        <Footer>
-          <InputNome placeholder={'Nome'} value={this.state.nomeInput} onChange={this.handleName}/>
-          <InputSms placeholder={'Mensagem'} value={this.state.mensagemInput} onChange={this.handleMensagem}/>
-          <Botao onClick={this.enviar}>Enviar</Botao>
-        </Footer>
-        <div>
-        {chat}
-        </div>
-        
-      </ContainerTudo>
-    </ContainerBody>
-  );
-}
-
-
-}
 
 
 export default App;

@@ -1,0 +1,41 @@
+.containerMsg {
+  overflow: hidden;
+  list-style: none;
+  padding: 0 0 50px 0;
+  margin: 0;
+  background: #efeeec;
+}
+
+.containerMsg .enviado{
+  text-align:right;
+}
+
+p {
+  background: white;
+  color: #424242;
+}
+
+.containerMsg .recebido p {
+  background: dodgerblue;
+  color: white;
+}
+
+.containerMsg .enviado p,
+.containerMsg .recebido p{
+  display:inline-block;
+  padding: 5px 8px;
+      margin: 0px;
+}
+
+.containerMsg .mensagem {
+ display:block;
+}
+
+.containerMsg .enviado .mensagem .p {
+  text-align: left;
+  display:inline;
+}
+
+.mensagem{
+  margin: 0 10px;
+}
